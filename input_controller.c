@@ -1,15 +1,18 @@
 /*
 // Ahmed Yassin, 400536694
-// main program for convert utility
+// Input controller handles user's arguments they provide and calls usage and help functions when they use the utility incorrectly
 */
 
+//Usage function
 void usage() {
     printf("Usage: convert [-b BASE] [-r START FINISH]\n");
     printf("1 < BASE < 37\n");
     printf("START and FINISH are long integers\n");
 }
 
+//Help function
 void help() {
+    
     usage()
     
     printf("Options:\n");
@@ -38,7 +41,7 @@ void help() {
 }
 
 /*
-// parse_args function to parse command-line arguments and set base and range values
+// handle_args function to handle command-line arguments and set base and range values
 // argc: argument count is the number of command-line arguments
 // argv[]: argument vector is the array of char* pointers
 // base: base value
@@ -46,7 +49,7 @@ void help() {
 // finish: finish value
 */
 
-int parse_args(int argc, char *argv[], int *base, long *start, long *finish) {
+int handle_args(int argc, char *argv[], int *base, long *start, long *finish) {
     
     //Default values for base, start, finish
     *base = 10;
@@ -102,30 +105,5 @@ int parse_args(int argc, char *argv[], int *base, long *start, long *finish) {
     }
 
     //Return 0 to indicate successful execution if all arguments are valid
-    return 0;
-}
-
-//Main function to drive conversion program
-int main(int argc, char *argv[]) {
-
-    int base;
-    long start, finish;
-
-    //Run parse_args function; if the execution is unsuccessful then return with failure
-    if (parse_args(argc, argv, &base, &start, &finish) != 0) {
-        return 1;
-    }
-
-    //For loop through each number in the range and convert to the base
-    for (long i = start; i <= finish; i++) {
-
-        //Display number and base
-        printf("%ld in base %d is ", i, base);
-        //Convert the number in the specified base and output it
-        convert_to_base(i, base);
-        printf("\n");
-    }
-    
-    //Return 0 to indicate successful execution
     return 0;
 }
