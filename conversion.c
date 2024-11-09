@@ -1,6 +1,6 @@
 /*
 // Ahmed Yassin, 400536694
-// Conversion converts long numbers and converts them into a new base
+// conversion.c converts long numbers and converts them into a new base
 */
 
 #include <stdio.h>
