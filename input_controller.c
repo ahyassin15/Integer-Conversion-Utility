@@ -3,6 +3,11 @@
 // Input controller handles user's arguments they provide and calls usage and help functions when they use the utility incorrectly
 */
 
+#include <stdio.h>    
+#include <stdlib.h>   
+#include <string.h>
+#include "input_controller.h"
+
 //Usage function
 void usage() {
     printf("Usage: convert [-b BASE] [-r START FINISH]\n");
@@ -13,7 +18,7 @@ void usage() {
 //Help function
 void help() {
     
-    usage()
+    usage();
     
     printf("Options:\n");
     printf("  -b BASE               Specifies the base for conversion.\n");
@@ -44,11 +49,7 @@ void help() {
 // handle_args function to handle command-line arguments and set base and range values
 // argc: argument count is the number of command-line arguments
 // argv[]: argument vector is the array of char* pointers
-// base: base value
-// start: start value
-// finish: finish value
 */
-
 int handle_args(int argc, char *argv[], int *base, long *start, long *finish) {
     
     //Default values for base, start, finish
@@ -57,14 +58,19 @@ int handle_args(int argc, char *argv[], int *base, long *start, long *finish) {
     *finish = 0;
 
     //Flags to track if base and range are set
-    int base_set = 0
+    int base_set = 0;
     int range_set = 0;
 
     //For loop through each command-line argument
     for (int i = 1; i < argc; i++) {
         
+        // Check for "--help" flag
+        if (strcmp(argv[i], "--help") == 0) {
+            help(); // Display the help message
+            return 1; // Exit after showing help
+        
         //Check "-b" flag to specify base
-        if (strcmp(argv[i], "-b") == 0 && i + 1 < argc) {
+        } else if (strcmp(argv[i], "-b") == 0 && i + 1 < argc) {
             
             //Convert next argument into integer for base
             *base = atoi(argv[++i]);
@@ -97,13 +103,17 @@ int handle_args(int argc, char *argv[], int *base, long *start, long *finish) {
         }
     }
 
-    //If base or range was not specified
-    if (!base_set || !range_set) {
-        //Display usage and return error
+    //If base not set, display usage and return 1
+    if (!base_set) {
         usage();
         return 1;
     }
 
-    //Return 0 to indicate successful execution if all arguments are valid
+    //If range not set, assume stdin mode
+    if (!range_set) {
+        *start = *finish = 0;
+    }
+
+    //Return 0 to indicate successful execution
     return 0;
 }

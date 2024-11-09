@@ -3,6 +3,8 @@
 // Conversion converts long numbers and converts them into a new base
 */
 
+#include <stdio.h>
+
 //convert_to_base function converts a number to the specified base and prints each digit
 void convert_to_base(long num, int base) {
 

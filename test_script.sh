@@ -77,7 +77,7 @@ test() {
 
 
 #Default base
-test './ctest' 'inp1.txt' 'ex_out1.txt' 'empty.txt' 0 
+test './ctest' 'inp1.txt' 'ex_out1.txt' 'empty.txt' 0
 
 #Base 2 conversion
 test './ctest -b 2' 'inp2.txt' 'ex_out2.txt' 'empty.txt' 0
@@ -107,7 +107,7 @@ test './ctest -r 9' 'empty.txt' 'empty.txt' 'usage.txt' 1
 test './ctest -r 7 2' 'empty.txt' 'empty.txt' 'usage.txt' 1
 
 #Non-long-int input
-test './ctest' 'inp2.txt' 'ex_out4.txt' 'invalid_inp.txt' 0
+test './ctest' 'inp2.txt' 'ex_out4.txt' 'invalid_inp.txt' 1
 
 
 # clean up
