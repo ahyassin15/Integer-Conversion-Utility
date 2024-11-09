@@ -1,6 +1,6 @@
 /*
 // Ahmed Yassin, 400536694
-// The convert utility is an integer conversion utility, designed to read longs from stdin, converts them to a new radix (base), and outputs the result to stdout
+// Conversion converts long numbers and converts them into a new base
 */
 
 //convert_to_base function converts a number to the specified base and prints each digit

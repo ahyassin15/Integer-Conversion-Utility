@@ -1,0 +1,42 @@
+name: CI - Test Convert Utility
+
+on:
+ push:
+   branches: [ "main" ]
+
+
+jobs:
+  build:          
+    runs-on: ubuntu-latest     
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4  
+
+    - name: Run the makefile   
+      run: make clean; make convert
+
+    - name: Upload Build
+      uses: actions/upload-artifact@v4
+      with:
+        name: convert
+        path: ./convert
+
+  test:
+    runs-on: ubuntu-latest     
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Run the Build Tests
+       run: make ctest; ./test_script > build_test_results.txt; gcov ctest-convert.c; gcov ctest-conversion.c; gcov-input_controller.c
+       continue-on-error: true
+    
+
+    - name: Upload the Build Test Results
+      if: ${{ always () }}
+
+      uses: actions/upload-artifact@v4
+      with:
+        name: Build the Test Results and Coverage
+        path:
+          ./build_test_results.txt
+          *.gcov

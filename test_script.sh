@@ -75,11 +75,40 @@ test() {
     echo "TC $tc Passed"
 }
 
-test './ctest' 'inp1.txt' 'ex_out1.txt' 'empty.txt'
-test './ctest -b 2' 'inp2.txt' 'ex_out2.txt' 'empty.txt'
-test './ctest -a' 'empty.txt' 'empty.txt' 'usage.txt'
 
-#add more test cases and edge cases here from the pdf instructions
+#Default base
+test './ctest' 'inp1.txt' 'ex_out1.txt' 'empty.txt' 0 
+
+#Base 2 conversion
+test './ctest -b 2' 'inp2.txt' 'ex_out2.txt' 'empty.txt' 0
+
+#Invalid usage
+test './ctest -a' 'empty.txt' 'empty.txt' 'usage.txt' 1
+
+#Test help flag
+test './ctest --help' 'empty.txt' 'empty.txt' 'help.txt' 1
+
+#Test range and base flag
+test './ctest -b 2 -r -3 3' 'empty.txt' 'outputs/ex_out3.txt' 'empty.txt' 0
+
+#No base provided after -b flag
+test './ctest -b' 'empty.txt' 'empty.txt' 'usage.txt' 1
+
+#Invalid base
+test './ctest -b 55' 'empty.txt' 'empty.txt' 'usage.txt' 1
+
+#No range provided after -r flag
+test './ctest -r' 'empty.txt' 'empty.txt' 'usage.txt' 1
+
+#Invalid incomplete range
+test './ctest -r 9' 'empty.txt' 'empty.txt' 'usage.txt' 1
+
+#Invalid decreasing range
+test './ctest -r 7 2' 'empty.txt' 'empty.txt' 'usage.txt' 1
+
+#Non-long-int input
+test './ctest' 'inp2.txt' 'ex_out4.txt' 'invalid_inp.txt' 0
+
 
 # clean up
 rm test_err.txt test_out.txt

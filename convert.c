@@ -1,6 +1,6 @@
 /*
 // Ahmed Yassin, 400536694
-// main program for convert utility
+// The convert utility is an integer conversion utility, designed to read longs from stdin, converts them to a new radix (base), and outputs the result to stdout
 */
 
 //Main function to drive conversion program
