@@ -103,13 +103,12 @@ int handle_args(int argc, char *argv[], int *base, long *start, long *finish) {
         }
     }
 
-    //If base not set, display usage and return 1
+    //If base not specified, base defaults to 10
     if (!base_set) {
-        usage();
-        return 1;
+        *base = DEFAULT_BASE;
     }
 
-    //If range not set, assume stdin mode
+    //If range not specified, assume stdin mode
     if (!range_set) {
         *start = *finish = 0;
     }

@@ -3,6 +3,7 @@
 
 #define MAX_BASE 36
 #define MIN_BASE 2
+#define DEFAULT_BASE 10
 
 
 void usage();
